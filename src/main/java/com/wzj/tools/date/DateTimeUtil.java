@@ -21,22 +21,25 @@ public class DateTimeUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(DateTimeUtil.class);
 
-    private static final String YYYY_MM_DD_HH_MM_SS="yyyy-MM-dd HH:mm:ss";
-    private static final String YYYY_MM_DD="yyyy-MM-dd";
-    private static final String HH_MM_SS="HH:mm:ss";
+    private static final String YYYYMMDDHHMMSS="yyyy-MM-dd HH:mm:ss";
+    private static final String YYYYMMDDHHMMSS_CHINESE="yyyy年MM月dd日 HH时mm分ss秒";
+    private static final String YYYYMMDDHHMMSSSSS="yyyy-MM-dd HH:mm:ss.SSS";
+    private static final String YYYYMMDD="yyyy-MM-dd";
+    private static final String YYYYMMDD_CHANESE="yyyy年MM月dd日";
+    private static final String HHMMSS_CHINESE="HH时mm分ss秒";
 
-    private static DateTimeFormatter getDateTimeFormatter(String formatStr){
+    public static DateTimeFormatter getDateTimeFormatter(String formatStr){
         if (formatStr==null||"".equals(formatStr)){
-            formatStr=YYYY_MM_DD_HH_MM_SS;
+            formatStr=YYYYMMDDHHMMSS;
         }
         return DateTimeFormatter.ofPattern(formatStr);
     }
 
-    private static LocalDateTime getLocalDateTime(Date date){
+    public static LocalDateTime getLocalDateTime(Date date){
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 
-    private static Date getDate(LocalDateTime localDateTime){
+    public static Date getDate(LocalDateTime localDateTime){
         return Date.from(localDateTime.atZone( ZoneId.systemDefault()).toInstant());
     }
 
